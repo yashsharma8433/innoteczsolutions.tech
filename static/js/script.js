@@ -54,3 +54,37 @@ window.addEventListener("scroll", function () {
     goTopBtn.classList.remove("active");
   }
 });
+
+// ------------------------------------------------------------------------------------------------- 
+
+
+document.getElementById('quote-form').addEventListener('submit', function(event) {
+  event.preventDefault(); 
+
+  var email = document.getElementById('email').value;
+  var message = document.getElementById('message').value;
+  var submitButton = document.getElementById('submit-btn');
+  var url = '/email?email=' + encodeURIComponent(email) + '&msg=' + encodeURIComponent(message);
+  submitButton.disabled = true;
+  submitButton.textContent = 'Sending...';
+  fetch(url, {
+    method: 'GET'
+  })
+  .then(function(response) {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.text(); // Expecting text response instead of JSON
+  })
+  .then(function(data) {
+    // console.log('Data sent successfully:', data);
+    alert('Data sent successfully');
+    submitButton.textContent = 'Sent';
+  })
+  .catch(function(error) {
+    console.error('Error sending data:', error);
+    alert('Error sending data');
+    submitButton.textContent = 'Send';
+    submitButton.disabled = false;
+  });
+});
