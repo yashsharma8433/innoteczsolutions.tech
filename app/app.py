@@ -25,7 +25,7 @@ def home():
 def e():
     quote_email = request.args.get('email')
     quote_msg = request.args.get('msg')
-    send("namitjainjob2111@gmail.com", "namitjain2111@gmail.com",quote_email,quote_msg)
+    send("innoteczsolutions@gmail.com", "innoteczsolutions@gmail.com",quote_email,quote_msg)
     return "Done"
 if __name__ == '__main__':
     app.run(debug=True)
